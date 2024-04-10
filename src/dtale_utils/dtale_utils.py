@@ -3,6 +3,7 @@ import zipfile
 import tempfile
 import dtale
 import os
+import re
 
 def zipped_parquet_to_dtale(zip_file_path):
     """
@@ -31,6 +32,7 @@ def zipped_parquet_to_dtale(zip_file_path):
     D-Tale session for dataset2 available at: http://localhost:40001
     """
     # Using a temporary directory to extract the Parquet files
+    d = None
     with tempfile.TemporaryDirectory() as extract_dir:
         # Unzipping the Parquet files
         with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
@@ -43,7 +45,43 @@ def zipped_parquet_to_dtale(zip_file_path):
         for file_name in parquet_files:
             pth_ = os.path.join(extract_dir, file_name)
             # Use the file name (without the extension) as the name of the D-Tale session
-            session_name = os.path.splitext(file_name)[0]
+            session_name = replace_non_alphanumeric_with_space(os.path.splitext(file_name)[0])
+            print(session_name)
             d = dtale.show_parquet(path=pth_, name=session_name)
 
-        print(f"D-Tale available at: {d._main_url}")
+
+    return d
+
+
+import re
+
+
+def replace_non_alphanumeric_with_space(s):
+    """
+    Replace all characters in the input string that are not alphanumeric (letters or numbers)
+    with spaces.
+
+    Parameters
+    ----------
+    s : str
+        The input string to be processed.
+
+    Returns
+    -------
+    str
+        A new string with all non-alphanumeric characters replaced by spaces.
+
+    Examples
+    --------
+    >>> text = "Hello, World! How are you today? @2024"
+    >>> replace_non_alphanumeric_with_space(text)
+    'Hello  World  How are you today   2024'
+
+    Note
+    ----
+    Alphanumeric characters are defined as letters (both uppercase and lowercase) and digits.
+    """
+    pattern = r'[^a-zA-Z0-9]'
+    return re.sub(pattern, ' ', s)
+
+
