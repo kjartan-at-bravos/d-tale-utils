@@ -13,5 +13,5 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-dependencies = ["dtale", "pandas"]
+dependencies = ["dtale", "pandas", "pyarrow"]
 

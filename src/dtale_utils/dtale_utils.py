@@ -26,7 +26,7 @@ def zipped_parquet_to_dtale(zip_file_path):
 
     Examples
     --------
-    >>> zipped_parquet_to_dtale('path/to/your/data.zip')
+    >>> zipped_parquet_to_dtale('/tmp/dtale.zip')
     D-Tale session for dataset1 available at: http://localhost:40000
     D-Tale session for dataset2 available at: http://localhost:40001
     """
@@ -41,8 +41,9 @@ def zipped_parquet_to_dtale(zip_file_path):
 
         # Loop through each Parquet file, read the data, and start a D-Tale session
         for file_name in parquet_files:
-            df = pd.read_parquet(os.path.join(extract_dir, file_name))
+            pth_ = os.path.join(extract_dir, file_name)
             # Use the file name (without the extension) as the name of the D-Tale session
             session_name = os.path.splitext(file_name)[0]
-            d = dtale.show(df, name=session_name)
-            print(f"D-Tale session for {session_name} available at: {d._main_url}")
+            d = dtale.show_parquet(path=pth_, name=session_name)
+
+        print(f"D-Tale available at: {d._main_url}")
