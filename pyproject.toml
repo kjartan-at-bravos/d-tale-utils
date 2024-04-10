@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dtale_utils"
+version = "0.0.1"
+license = "MIT"	
+authors = [{ name = "Kjartan Halvorsen", email = "kjartan.halvorsen@bravosenergia.com" }]
+description = "Loading several dataframes into d-tale"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = ["dtale", "pandas"]
+
