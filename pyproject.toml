@@ -5,7 +5,6 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "dtale_utils"
 version = "0.0.1"
-license = "MIT"	
 authors = [{ name = "Kjartan Halvorsen", email = "kjartan.halvorsen@bravosenergia.com" }]
 description = "Loading several dataframes into d-tale"
 readme = "README.md"
