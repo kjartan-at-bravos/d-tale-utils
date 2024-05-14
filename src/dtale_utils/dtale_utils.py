@@ -91,7 +91,7 @@ def zipped_parquet_to_dtale(zip_file_path, symbols_to_include: set[str]):
 
         ds = []
         # Loop through each Parquet file, read the data, and start a D-Tale session
-        for i_, file_name in enumerate(parquet_files):
+        for i_, file_name in enumerate(sorted(parquet_files)):
             pth_ = os.path.join(extract_dir, file_name)
             # Use the file name (without the extension) as the name of the D-Tale session
             symbol_name = os.path.splitext(file_name)[0]
